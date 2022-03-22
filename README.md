@@ -1,4 +1,4 @@
-:warning: Everything between << >> needs to be replaced (remove << >> after replacing)
+arning: Everything between << >> needs to be replaced (remove << >> after replacing)
 # CS110 Project Proposal
 # << Project Title >>
 ## CS 110 Final Project
@@ -9,8 +9,8 @@
 
 << [link to demo presentation slides](#) >>
 
-### Team: << team name >>
-#### << Team Members >>
+### Team: Group 9
+#### Thomas Britt, Daly Olivert, Kia Eshraghi
 
 ***
 
