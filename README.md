@@ -16,7 +16,9 @@ arning: Everything between << >> needs to be replaced (remove << >> after replac
 
 ## Project Description *(Software Lead)*
 
-<< Give an overview of your project >>
+
+
+
 
 ***    
 
