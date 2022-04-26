@@ -13,14 +13,14 @@ class Character(pygame.sprite.Sprite):
     self.rect.y = y
 
   def move(self,direction):
-    if direction == "UP":
-      self.rect.y = self.rect.y - 1
-    elif direction == "DOWN":
-      self.rect.y = self.rect.y + 1
-    elif direction == "LEFT":
-      self.rect.x = self.rect.x - 1
-    elif direction == "RIGHT":
-      self.rect.x = self.rect.x + 1
+    if direction == "Left":
+      self.rect.x = self.rect.y - 1
+    elif direction == "Right":
+      self.rect.x = self.rect.y + 1
+    #elif direction == "LEFT":
+      #self.rect.x = self.rect.x - 1
+    #elif direction == "RIGHT":
+      #self.rect.x = self.rect.x + 1
 
   def fight(self, opponent):
         return random.randrange(3)

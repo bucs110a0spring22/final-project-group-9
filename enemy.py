@@ -10,3 +10,8 @@ class Enemy(player.Player):
             self.rect.y -= 1
         elif self.rect.y < 0:
             self.rect.y += 1
+
+
+
+#enemy1 ufo that periodically appears and fires a bulets downward. Does not move. Dies in one hit.
+#enemy2 an alien that appears on screen but doesnt move initially for 3 seconds. After the 3 seconds it starts to home in on the player. The player gets hit by the alien it loses health. 
