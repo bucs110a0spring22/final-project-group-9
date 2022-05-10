@@ -4,7 +4,7 @@ class Character(pygame.sprite.Sprite):
   
     def __init__(self, name, x, y, image):
       super().__init__()
-      self.image = pygame.image.load('assets/spaceboy.png')
+      self.image = pygame.image.load('assets/spaceboy.png').convert_alpha()
       self.rect = self.image.get_rect()
       self.rect.x = 20
       self.rect.y = 100

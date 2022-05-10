@@ -22,8 +22,8 @@ class Controller:
             y = 400
             self.enemy.add(asteroid.Asteroid("Asteroid", x, y,       
             "assets/Asteroid.png"))
-        self.hero = character.Character("Spaceboy", 300, 400, "assets/spaceboy.png")
-        self.all_sprites = pygame.sprite.Group((self.hero), tuple(self.enemy))
+        self.character = character.Character("Spaceboy", 300, 400, "assets/spaceboy.png")
+        self.all_sprites = pygame.sprite.Group((self.character), tuple(self.enemy))
         self.state = "GAME"
     
     
@@ -57,13 +57,15 @@ class Controller:
             self.character.move_left()
           elif(event.key == pygame.K_RIGHT):
             self.character.move_right()
+          
+            
         
       
             
       self.enemy.update()
       #self.screen.fill(0,0,0) 
       self.screen.blit(self.background, (0, 0))
-      if(self.hero.health == 0):
+      if(self.character.health == 0):
           self.state = "GAMEOVER"
       self.all_sprites.draw(self.screen)
 
