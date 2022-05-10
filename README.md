@@ -62,15 +62,15 @@ The Project is broken down into the following file structure:
 
    * You must outline the team member roles and who was responsible for each class/method, both individual and collaborative.
 
-### Software Lead - << name >>
+### Software Lead - << Daly >>
 
 << Worked as integration specialist by... >>
 
-### Front End Specialist - << name >>
+### Front End Specialist - << Tommy >>
 
 << Front-end lead conducted significant research on... >>
 
-### Back End Specialist - << name >>
+### Back End Specialist - << Kia >>
 
 << The back end specialist... >>
 
@@ -83,6 +83,12 @@ The Project is broken down into the following file structure:
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Run Counter Program  | GUI window appears with count = 0  |          |
-|  2  | click count button  | display changes to count = 1 |                 |
+|  1  | Click Run Button | different type of enemies to attack player ||
+|  2  | click space button  | player character shoots projectile ||
+|  3  | click left arrow key  | player character moves left ||
+|  4  | click right arrow key  | player character moves right ||
+|  5  | click up arrow key  | player character moves up ||
+|  6  | click down arrow key  | player character moves down ||
+|  7  | projectile hits enemy  | player loses health/dies ||
+|  8  | enemy collision with player  | player character loses health/dies ||
 etc...
