@@ -1,32 +1,30 @@
 import sys
 import pygame
-import random
 from src import enemy
 from src import character
-#from src import bullet
-from src import asteroid
+from src import bullet
 
 class Controller:
-  from src import character
   def __init__(self, width=640, height=480):
         pygame.init()
         self.score = 0
-        self.screen = pygame.display.set_mode((640, 480))
-        self.background = pygame.image.load("assets/Background.png")
+        self.screen = pygame.display.set_mode((width, height))
+        self.bg = pygame.image.load("assets/Background.png")
+        self.background = pygame.transform.scale(self.bg, (width, height))
         self.screen.blit(self.background, (0, 0))
-        self.enemy = enemy.Enemy("Alien", 80, 50, "assets/Ufo.png")
-        self.enemy = pygame.sprite.Group()
-        num_enemy = 5
-        for i in range(num_enemy):
-            x = random.randrange(50, 600)
-            y = 400
-            self.enemy.add(asteroid.Asteroid("Asteroid", x, y,       
-            "assets/Asteroid.png"))
-        self.character = character.Character("Spaceboy", 300, 400, "assets/spaceboy.png")
-        self.all_sprites = pygame.sprite.Group((self.character), tuple(self.enemy))
+        self.bullets = pygame.sprite.Group()
+        self.enemy = enemy.Enemy("Alien", 300, 480, "assets/enemyboy.png")
+        self.character = character.Character("Spaceboy",100, 100, "assets/spaceboy.png")
+        self.bullet = bullet.Bullet("Bullet", self.character.rect.x, self.character.rect.y, "assets/bullet.png", 'ready')
+        self.all_sprites = pygame.sprite.Group((self.character), (self.enemy))
         self.state = "GAME"
-    
-    
+        num_bullets = 4
+        for i in range(num_bullets):
+          self.bullets.add(bullet.Bullet("bullet", self.bullet.rect.x, self.bullet.rect.y, "assets/bullet.png", 'ready'))
+          
+
+
+
   def mainLoop(self):
     while True:
             if(self.state == "GAME"):
@@ -44,37 +42,59 @@ class Controller:
       #redraw
     
   def gameLoop(self):
+    pygame.key.set_repeat(1,1)
+    self.image_width = 45
+    self.display_width = 640
     while self.state == "GAME":
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
           sys.exit()
+        
         if event.type == pygame.KEYDOWN:
-          if(event.key == pygame.K_UP):
-            self.character.move_up()
-          elif(event.key == pygame.K_DOWN):
-            self.character.move_down()
-          elif(event.key == pygame.K_LEFT):
+          if(event.key == pygame.K_LEFT):
             self.character.move_left()
+            if self.character.rect.x < 0:
+              self.character.rect.x = 0
+            elif self.character.rect.x + self.image_width > self.display_width:
+              self.character.rect.x = self.display_width - self.image_width
           elif(event.key == pygame.K_RIGHT):
             self.character.move_right()
-          
+            if self.character.rect.x > 640:
+              self.character.rect.x = 640
+            elif self.character.rect.x + self.image_width > self.display_width:
+              self.character.rect.x = self.display_width - self.image_width
+          elif(event.key == pygame.K_SPACE):
+            self.bullets.update(self.screen)
+            self.bullet.state = 'ready'
+          if(event.key == pygame.K_UP):
+            self.character.move_up()
+          if(event.key == pygame.K_DOWN):
+            self.character.move_down()
             
-        
+        #rightwindow = pygame.display(self.character.score)
+        #leftwindow = pygame.display(self.character.health)
+          
       
             
-      self.enemy.update()
+      #self.enemy.update()
       #self.screen.fill(0,0,0) 
       self.screen.blit(self.background, (0, 0))
+      #self.screen.blit(self.bullet.image, (self.bullet.rect.x - 10, self.bullet.rect.y +10))
+      self.bullets.draw(self.screen)
       if(self.character.health == 0):
           self.state = "GAMEOVER"
       self.all_sprites.draw(self.screen)
+      
 
             # update the screen
       pygame.display.flip()
-     # character()
+     
+  def Score(self):
+    if self.enemy.kill():
+      self.character.score +=1
     
   def gameoverloop(self):
-    self.hero.kill()
+    self.character.kill()
     pygame.font.init()
     myfont = pygame.font.SysFont(None, 30)
     message = myfont.render('Game Over', False, (0, 0, 0))
@@ -85,21 +105,7 @@ class Controller:
             if event.type == pygame.quit:
                 sys.exit()
   
-#  def playermovement(self,event,screen,x,y):
-#    if event.type == pygame.KEYDOWN:
-#          if(event.key == pygame.K_UP):
-#            self.character.move_up()
-#          elif(event.key == pygame.K_DOWN):
-#            self.character.move_down()
-#          elif(event.key == pygame.K_LEFT):
-#            self.character.move_left()
-#          elif(event.key == pygame.K_RIGHT):
-#            self.character.move_right()
-#    screen.blit(self.hero, (x,y))
   
     
 
 
-#write code for the scoring process. You blow up an asteroid you get 1 point. shoot a ufo you get 5 points. you shoot a homing alien you get 8 points. The score should appear at the top right side of the screen.
-
-#write code for the health system in the game. The health will appear on the top left. The spaceship starts off with 3 health after getting hit by anything the spaceship loses 1 health.

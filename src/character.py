@@ -3,15 +3,18 @@ import pygame
 class Character(pygame.sprite.Sprite):
   
     def __init__(self, name, x, y, image):
-      super().__init__()
-      self.image = pygame.image.load('assets/spaceboy.png').convert_alpha()
+      pygame.sprite.Sprite.__init__(self)
+      self.img = pygame.image.load('assets/spaceboy.png')
+      self.image = pygame.transform.scale(self.img, (70, 70))
       self.rect = self.image.get_rect()
-      self.rect.x = 20
-      self.rect.y = 100
-      self.speed = 5
+      self.rect.x = 320
+      self.rect.y = 320
+      self.image_width = 45
+      self.display_width = 640
+      self.speed = 1
       self.health = 3
-      self.direction = 'R'
-      #self.screen = pygame.display.set_mode(800, 600)
+      self.score = 0
+    
     
     def move_up(self):
         self.rect.y -= self.speed
@@ -22,17 +25,4 @@ class Character(pygame.sprite.Sprite):
     def move_right(self):
         self.rect.x += self.speed
 
-    def fights(self, asteroid, enemy):
-      fights = pygame.sprite.spritecollide(self.hero, self.enemy, True)
-      if(fights):
-        for enemy in fights:
-          if(self.hero.fights(enemy)):
-            enemy.kill()
-            self.score += 1
-            print(self.score)
-          else:
-            self.enemy.add(enemy)
-            print(self.score)
-    def Character(self, screen):
-      screen.blit(self.image, (self.rect.x, self.rect.y))
-  
+            
